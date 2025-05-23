@@ -189,17 +189,13 @@
             </div>`;
             });
     }
-
+    
     function fetchSportsNews() {
-        const sports = [
-            'cricket', 'ufc', 'football', 'tennis', 'formula 1',
-
-        ];
+        const sports = ['cricket', 'ufc', 'football', 'tennis', 'formula 1'];
         const randomSport = sports[Math.floor(Math.random() * sports.length)];
 
-
-        const apiKey = '5510a83a428e43d09a0369b7c7298175';
-        const url = `https://newsapi.org/v2/everything?q=${randomSport}&language=en&pageSize=3&apiKey=${apiKey}`;
+        const apiKey = 'dc342a88419f89f00738b7eb04a5c71c'; // Replace with your GNews API key
+        const url = `https://gnews.io/api/v4/search?q=${randomSport}&lang=en&max=3&token=${apiKey}`;
 
         fetch(url)
             .then(response => {
@@ -215,7 +211,7 @@
                 <div class="card mb-3">
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img src="${article.urlToImage || 'https://via.placeholder.com/300x200?text=No+Image'}" 
+                            <img src="${article.image || 'https://via.placeholder.com/300x200?text=No+Image'}" 
                                  class="img-fluid rounded-start" alt="${article.title}"
                                  onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
                         </div>
@@ -236,11 +232,11 @@
             .catch(error => {
                 console.error('Error fetching sports news:', error);
                 document.getElementById('sports-news-container').innerHTML = `
-            <div class="alert alert-warning">
-                <i class="fas fa-running me-2"></i>
-                Sports news unavailable. Showing placeholder data.
-            </div>
-            ${getPlaceholderNews()}`;
+                <div class="alert alert-warning">
+                    <i class="fas fa-running me-2"></i>
+                    Sports news unavailable. Showing placeholder data.
+                </div>
+                ${getPlaceholderNews()}`;
             });
     }
 
